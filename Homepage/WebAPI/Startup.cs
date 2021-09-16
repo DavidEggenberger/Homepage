@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,6 +53,10 @@ namespace WebAPI
             {
                 endpoints.MapRazorPages();
                 endpoints.MapFallbackToFile("index.html");
+                endpoints.MapGet("/DummySecret", async context =>
+                {
+                    await context.Response.WriteAsync(context.RequestServices.GetRequiredService<IConfiguration>()["DummySecret"]);
+                });
             });
         }
     }

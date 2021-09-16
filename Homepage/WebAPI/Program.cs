@@ -1,3 +1,4 @@
+using Azure.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +21,10 @@ namespace WebAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        config.AddAzureKeyVault(new Uri("https://justrollkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }
