@@ -16,16 +16,19 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up .NET Core
+    - name: Set up .NET Core 🏗
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
         include-prerelease: true
 
-    - name: Build with dotnet
+    - name: Build with dotnet 👷🏽‍♂️
       run: dotnet build --configuration Release
+      
+    - name: Run automated Tests 🧪
+      run: dotnet test --configuration Release --no-build
 
-    - name: dotnet publish
+    - name: dotnet publish 🚀 
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
     - name: Upload artifact for deployment job
