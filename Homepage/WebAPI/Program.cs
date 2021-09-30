@@ -23,7 +23,8 @@ namespace WebAPI
                 {
                     webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                     {
-                        config.AddAzureKeyVault(new Uri("https://justrollkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+                        config.AddAzureKeyVault(new Uri("https://justrollkeyvault.vault.azure.net/"),
+                            new DefaultAzureCredential(new DefaultAzureCredentialOptions { ManagedIdentityClientId = "466d4d5f-bbac-4123-8b10-905e2fc51cb5" }));
                     });
                     webBuilder.UseStartup<Startup>();
                 });
